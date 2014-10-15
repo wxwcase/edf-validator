@@ -65,7 +65,7 @@ public class ESATable extends EDFTable {
     public void createESATable(ESAHeader esaHeader) {
     	// algorithm: map each attribute value of each channel to each cell
         int nChannels = esaHeader.getNumberOfChannels();
-        this.setModel(new ESATableModel(nChannels)); //this line is required; otherwise, getValueAt does not work
+        this.setModel(new ESATableModel(nChannels)); // this line is required; otherwise, getValueAt does not work
         ESAChannel esaChannel;
         String key, aValue;
         for (int nrow = 0; nrow < nChannels; nrow++)

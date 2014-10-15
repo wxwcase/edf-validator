@@ -35,35 +35,21 @@ public class ESAHeader extends ESAChannel {
      * @param nChannels the number of Channels
      * @param istemplate true if this header is template
      */
-    public ESAHeader(RandomAccessFile raf, File edfFile, int nChannels, boolean istemplate) {  
-//      Algorithm:
-//      1. set the number of channels;
-//      2. set the host file of the header
-//      3. attach channels to the header
-    	// Clean code: Move the next two lines out of the outer if statement, because
-    	//             they are duplicated in both case
-    	// wei wang, 2014-7-16
+    public ESAHeader(RandomAccessFile raf, File edfFile, int nChannels) {  
+    	// Algorithm:
+    	// 1. set the number of channels;
+    	// 2. set the host file of the header
+    	// 3. attach channels to the header
     	setNumberOfChannels(nChannels); // end of 1.
 	    setHostEdfFile(edfFile); // end of 2.
-    	if(!istemplate) {
-    	    if (nChannels == 0) {
-    	        signalHeader = null;
-    	        return;
-    	    }
-    	    signalHeader = new ESAChannel[nChannels]; // start of 3.
-    	    for (int i = 0; i < nChannels; i++) {                    
-    	        signalHeader[i] = new ESAChannel(raf, i, nChannels);          
-    	    } // end of 3.
-    	} else {
-    	    if (nChannels == 0) {
-//    	        signalTemplateHeader = null;
-    	        return;
-    	    }
-//    	    signalTemplateHeader = new ESATemplateChannel[nChannels]; // start of 3.
-//    	    for (int i = 0; i < nChannels; i++) {                    
-//    	        signalTemplateHeader[i] = new ESATemplateChannel(raf, i, nChannels);          
-//    	    } // end of 3.
-    	}                    
+    	if (nChannels == 0) {
+    	    signalHeader = null;
+    	    return;
+    	}
+    	signalHeader = new ESAChannel[nChannels]; // start of 3.
+    	for (int i = 0; i < nChannels; i++) {                    
+    		signalHeader[i] = new ESAChannel(raf, i, nChannels);          
+    	} // end of 3.
     }
 
     /**

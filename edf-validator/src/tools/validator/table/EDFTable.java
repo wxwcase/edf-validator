@@ -111,7 +111,7 @@ public class EDFTable extends JTable {
 	 */
     public ArrayList<Incompliance> parseEIATable(String edfPath) {
     	// test
-    	System.out.println("EDFTable >> parseEIATable(String edfPath)");
+//    	System.out.println("EDFTable >> parseEIATable(String edfPath)");
     	// 1. get edf-file name
     	// 2. validate edf file
     	

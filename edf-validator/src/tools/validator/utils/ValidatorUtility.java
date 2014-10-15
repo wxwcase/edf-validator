@@ -456,7 +456,6 @@ public class ValidatorUtility {
 		 ************************************************************/
         col = COL_INDEX_VERSION + 1;
 		String version = (String)eiaTable.getModel().getValueAt(0, col);
-		System.out.println("Version: " + version); // TODO: test
 		if (version == null || version.equals("")) {
 			//[Version](A.3) cannot be empty field
 			description = Incompliance.error_eia_empty;
@@ -826,9 +825,11 @@ public class ValidatorUtility {
 	 */
 	public static void generateInvalidReport(ArrayList<Incompliance> aggregateIncompliances) {
 		
-		addElementIntoLog("===============================================================", true, ValidatorMain.log);
-		addElementIntoLog("  => User start a validation task at " + MyDate.currentDateTime(), true, ValidatorMain.log);
-		addElementIntoLog("  *  The total number of errors: " + aggregateIncompliances.size(), true, ValidatorMain.log);
+		addElementIntoLog(
+				"===============================================================================================", 
+				true, ValidatorMain.log);
+		addElementIntoLog("  >>> User start a validation task at: " + MyDate.currentDateTime(), true, ValidatorMain.log);
+		addElementIntoLog("  >>> Number of errors: " + aggregateIncompliances.size(), true, ValidatorMain.log);
 		
 		/************************************************************
 		 * The below is improved code for output format of validation report
@@ -848,13 +849,18 @@ public class ValidatorUtility {
 		while(iterator.hasNext()){
 			Entry<String, ArrayList<Incompliance>> entry = iterator.next();
 			
-			if (entry!=null && entry.getKey()!=null && entry.getValue()!=null){
+			if (entry != null && entry.getKey() != null && entry.getValue() != null) {
 				String message = "";
-				message += "   ------------------" + "\r\n";
-				message += "   EDF file: " + entry.getKey() + "\r\n";
+				message += 
+						"  ---------------------------------------------------------------------------------------------"
+						+ "\r\n";
+				message += "  EDF file: " + entry.getKey() + "\r\n";
+				message += "  Incompliances:" + "\r\n";
 				int i = 0;
-				for (Incompliance error : entry.getValue()){
-					message += "   +" + (++i) + " [Row: " + (error.getRowIndex() + 1) + ", Col: " + (error.getColumnIndex() + 1) + "] " + error.getDescription() + "\r\n";
+				// TODO: should ouput what channel has what kind of Incompliance
+				for (Incompliance error : entry.getValue()) {
+					message += "  +" + (++i) + " " + error.getDescription() + " [Channel: " + (error.getRowIndex() + 1) + ", Attribute: " + 
+					(error.getColumnIndex() + 1) + "] " + "\r\n";
 				}
 				addElementIntoLog(message, true, ValidatorMain.log);
 			}
@@ -870,9 +876,9 @@ public class ValidatorUtility {
      * Logs message. if showOnScreen is true, the message will also be printed on screen
      * @param message the message to be logged
      * @param showOnScreen true to print the message on screen
-     * @param outfile output file name
+     * @param log output file name
      */
-    public static void addElementIntoLog(String message, boolean showOnScreen, String outfile) {
+    public static void addElementIntoLog(String message, boolean showOnScreen, String log) {
     	
     	if (showOnScreen) {
 			System.out.println(message);
@@ -880,9 +886,9 @@ public class ValidatorUtility {
     	
 		BufferedWriter out = null;
 		try {
-			if (outfile.contains(File.separator))
-				new File(outfile).getParentFile().mkdirs();
-			out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outfile, (new File(outfile)).exists())));
+			if (log.contains(File.separator))
+				new File(log).getParentFile().mkdirs();
+			out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(log, (new File(log)).exists())));
 			out.write(message + "\r\n");
 		} catch (Exception e) {
 			e.printStackTrace();

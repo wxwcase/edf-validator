@@ -94,9 +94,7 @@ public class Incompliance {
     /**
      * Default constructor
      */
-    public Incompliance() {
-        ;
-    }
+    public Incompliance() {}
 
     /**
      * Set the filename that contains this incompliance

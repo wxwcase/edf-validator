@@ -31,18 +31,20 @@ public class EDFFileHeader {
      * Constructs EDFFileHeader using RandomAccessFile, EDF file name and whether or not it is a template	 
      * @param raf the file to be read
      * @param edfFile the host EDF file
-     * @param istemplate true if this is a template
      */
-    public EDFFileHeader(RandomAccessFile raf, File edfFile, boolean istemplate) {
+    public EDFFileHeader(RandomAccessFile raf, File edfFile) {
         try {
             eiaHeader = new EIAHeader(raf, edfFile);
-            
-            if (edfFile.getAbsolutePath().indexOf(".eia") == -1) {
-                int numberOfChannels = 
-                		Integer.parseInt(eiaHeader.getAttributeValueAt(EIA.NUMBER_OF_SIGNALS)); //2.
-                esaHeader = new ESAHeader(raf, edfFile, numberOfChannels, istemplate); //3.
+            try {
+            	if (edfFile.getAbsolutePath().indexOf(".eia") == -1) {
+            		int numberOfChannels = Integer.parseInt(eiaHeader.getAttributeValueAt(EIA.NUMBER_OF_SIGNALS)); //2.
+            		esaHeader = new ESAHeader(raf, edfFile, numberOfChannels); //3.
+            	}
+            } catch(Exception e) {
+            	e.printStackTrace();
+            } finally {
+            	raf.close(); //4.
             }
-            raf.close(); //4.
         } catch (IOException e) {
             e.printStackTrace();
         } //1.
