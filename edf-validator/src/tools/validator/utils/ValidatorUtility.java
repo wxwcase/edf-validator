@@ -14,6 +14,10 @@ import tools.validator.table.EDFTable;
 import tools.validator.table.EIATable;
 import tools.validator.table.ESATable;
 
+/**
+ * Utilities for validator
+ * @author wei wang, modified on 2014-10-14
+ */
 public class ValidatorUtility {
 	
 	/**

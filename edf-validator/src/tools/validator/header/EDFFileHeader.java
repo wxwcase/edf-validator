@@ -6,6 +6,7 @@ import java.io.RandomAccessFile;
 
 /**
  * EDF file header, consists of EIAHeader and ESA header
+ * @author wei wang, modified on 2014-10-14
  */
 public class EDFFileHeader {
 

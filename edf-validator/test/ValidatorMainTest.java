@@ -1,5 +1,8 @@
 import tools.validator.ValidatorMain;
 
+/**
+ * @author wei wang, 2014-10-14
+ */
 public class ValidatorMainTest {
 	
 	public static String edf = "/Users/wei/Desktop/NSRR_Current_Working/A-Test-Resource/123.edf";
