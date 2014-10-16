@@ -16,10 +16,6 @@ public class ValidatorMain {
 	
 	public static String log = "log.txt";
 	
-	public ValidatorMain() {		
-		
-	}
-	
 	/**
 	 * Sets up the environment for conduct validation 
 	 * @param edfPath EDF file path
@@ -40,8 +36,6 @@ public class ValidatorMain {
 	
 	/**
 	 * Conducts validation using EDF file directory and the output directory
-	 * @param edfPath the EDF file path
-	 * @param output the output directory 
 	 */
 	public void conductValidation() {
 		// standardize path
@@ -50,11 +44,14 @@ public class ValidatorMain {
 		
 		// perform validation
 		validate(edfPath, log);
+		System.out.println("Validation done.");
+		System.out.println("===============================================================================================");
 	}
 	
 		
 	private void validate(String edfPath, String log) {
-		
+		System.out.println("===============================================================================================");
+		System.out.println("Start validating EDF: " + edfPath);
 		if(edfFile == null || edfPath == null ||edfPath == "") {
 			ValidatorUtility.addElementIntoLog("   + : EDF file path is not valid", true, log);	
 			return;
@@ -86,9 +83,9 @@ public class ValidatorMain {
 				for(Incompliance inc : esaIncompliances) {
 					aggregateIncompliances.add(inc);
 				}
-			}				
+			}
 			if(aggregateIncompliances != null)
-				ValidatorUtility.generateInvalidReport(aggregateIncompliances);			
+				ValidatorUtility.generateInvalidReport(aggregateIncompliances);
 		} else {
 			System.out.println("EDF file: \n" + edfPath + "\ndoes not exist"); // test
 			// add the result to log
@@ -99,7 +96,7 @@ public class ValidatorMain {
         try {
             RandomAccessFile raf = new RandomAccessFile(edfFile, "r");
             edfHeader = new EDFFileHeader(raf, edfFile);
-            System.out.println(">>> Yield EDF header done"); // test
+//            System.out.println(">>> Yield EDF header done"); // test
         } catch (IOException f) {
         	edfHeader = null;
         	ValidatorUtility.addElementIntoLog("   + : Cannot open EDF file", true, log); // true: show on screen
@@ -112,7 +109,7 @@ public class ValidatorMain {
 	private void yieldEIATable() {
         // iniEiaTable of type EIATable
         eiaTable = new EIATable(edfHeader);
-        System.out.println(">>> Yield EIA table done"); // test
+//        System.out.println(">>> Yield EIA table done"); // test
     }
     
     /**
@@ -131,7 +128,7 @@ public class ValidatorMain {
         esaTable = new ESATable(esaHeader);
         // configure the status        
         esaTable.setSourceMasterFile(edfFile); // set source file
-        System.out.println(">>> Yield ESA table done"); // test
+//        System.out.println(">>> Yield ESA table done"); // test
     }
     
     private String edfPath;

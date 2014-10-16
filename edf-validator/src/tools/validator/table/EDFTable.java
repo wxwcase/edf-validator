@@ -110,18 +110,8 @@ public class EDFTable extends JTable {
 	 * @return an array list of Incompliances generated during parsing
 	 */
     public ArrayList<Incompliance> parseEIATable(String edfPath) {
-    	// test
-//    	System.out.println("EDFTable >> parseEIATable(String edfPath)");
     	// 1. get edf-file name
     	// 2. validate edf file
-    	
-//    	int nrow = this.getRowCount();
-//    	String[] fileList = new String[nrow];
-//        for (int i = 0; i < nrow; i++) {
-//        	String fileName = MainWindow.getSrcEdfFiles().get(i).getAbsolutePath();
-//        	fileList[i] = fileName;
-//        }
-        
         return ValidatorUtility.parseEIATable((EIATable)this, edfPath);
     }
     

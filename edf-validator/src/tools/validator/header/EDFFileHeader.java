@@ -89,7 +89,6 @@ public class EDFFileHeader {
     ////////////////////////////////////////////////////////////////////////////////
     /////////////// START of getters and setters ///////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////
-
     
     /**
      * Sets EIAHeader using an EIHeader
@@ -114,7 +113,6 @@ public class EDFFileHeader {
     public void setEsaHeader(ESAHeader esaHeader) {
         this.esaHeader = esaHeader;
     }
-
 
     /**
      * Returns the ESAHeader
